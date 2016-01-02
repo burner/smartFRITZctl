@@ -57,13 +57,11 @@ void main(string[] args)
 	}
 
 	// smarthome
-	SmartHome sh = new SmartHome();
-
 	if(cmdListDevices){
-		string[] deviceIDs = sh.getListofDevicesIDs(se);
+		string[] deviceIDs = SmartHome.getListofDevicesIDs(se);
 		writeln("List of SmartHome devices:");
 		foreach(string deviceID; deviceIDs) {
-			writeln("- " ~ deviceID ~ " (" ~ sh.getNameOfDevice(se, deviceID) ~ ")");
+			writeln("- " ~ deviceID ~ " (" ~ SmartHome.getNameOfDevice(se, deviceID) ~ ")");
 		}
 	}
 
@@ -71,10 +69,10 @@ void main(string[] args)
 	writeln(cmdSwitchToggle);
 
 	if(cmdSwitchOn != "")
-		sh.setSwitchDevice(se, cmdSwitchOn, true);	
+		SmartHome.setSwitchDevice(se, cmdSwitchOn, true);	
 	if(cmdSwitchOff != "")
-		sh.setSwitchDevice(se, cmdSwitchOff, false);	
+		SmartHome.setSwitchDevice(se, cmdSwitchOff, false);	
 	if(cmdSwitchToggle != "")
-		sh.toggleSwitchDevice(se, cmdSwitchToggle);	
+		SmartHome.toggleSwitchDevice(se, cmdSwitchToggle);	
 
 }
