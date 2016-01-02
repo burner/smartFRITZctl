@@ -2,13 +2,13 @@ import std.string;
 
 import inifiled;
 
-@INI("Connection")
-struct Config {
+@INI("connection")
+struct SessionConfig {
         @INI("hostname of fritz.box")
-        string login_host;
+        string host;
         @INI("username (empty by default)")
-        string login_user;
+        string user;
         @INI("password")
-        string login_pwd;
+        string pwd;
 }
 
