@@ -4,7 +4,7 @@ import std.string;
 
 import session;
 
-class SmartHome
+class HomeAutomation
 {
 	static string[] getListofDevicesIDs(Session session)
 	{
@@ -23,13 +23,14 @@ class SmartHome
 	{
 		string command = power ? "setswitchon" : "setswitchoff";
 		string request = "http://fritz.box/webservices/homeautoswitch.lua?ain=" ~ deviceID ~ "&switchcmd=" ~ command  ~"&sid=" ~ session.getID();
-		return cast(bool) to!int(get(request));
+		return cast(bool) to!int(chop(get(request)));
 	}
 
 	static bool toggleSwitchDevice(Session session, string deviceID)
 	{
 		string request = "http://fritz.box/webservices/homeautoswitch.lua?ain=" ~ deviceID ~ "&switchcmd=setswitchtoggle&sid=" ~ session.getID();
-		return cast(bool) to!int(get(request));
+		int result = to!int(chop(get(request)));
+		return cast(bool) result;
 	}
 }
 

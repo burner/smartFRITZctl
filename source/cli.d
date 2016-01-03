@@ -6,35 +6,33 @@ import inifiled;
 
 import config;
 import session;
-import smarthome;
+import homeautomation;
 
 void main(string[] args)
 {
-	SessionConfig confConnection;
-
-	bool cmdListDevices = false;
+	// parsing command line arguments
 	bool cmdConfigure = false;
-	string cmdSwitchOn;
-	string cmdSwitchOff;
-	string cmdSwitchToggle;
-	getopt(args, "list-devices", &cmdListDevices,
-			"configure" , &cmdConfigure,
-			"smarthome-turnOn", &cmdSwitchOn,
-			"smarthome-turnOff", &cmdSwitchOff,
-			"smarthome-toggle", &cmdSwitchToggle);
-
+	bool cmdHomeDevices = false;
+	string cmdHomeSwitchOn;
+	string cmdHomeSwitchOff;
+	string cmdHomeSwitchToggle;
+	getopt(args, "configure" , &cmdConfigure,
+			"home-devices", &cmdHomeDevices,
+			"home-switch-on", &cmdHomeSwitchOn,
+			"home-switch-off", &cmdHomeSwitchOff,
+			"home-switch-toggle", &cmdHomeSwitchToggle);
+	
+	// configuration
+	SessionConfig confConnection;
 	if(cmdConfigure){
 		char[] input;
 		confConnection.host = "fritz.box";
-    		
 		writeln("Enter Username");
 		readln(input);
 		confConnection.user = chop(cast(string) input);
-    		
 		writeln("Enter Password");
 		readln(input);
 		confConnection.pwd = chop(cast(string) input);
-		
 		writeINIFile(confConnection, "smartFRITZctl.ini");
 		return;
 	}
@@ -48,23 +46,19 @@ void main(string[] args)
 		return;
 	}
 
-	// smarthome
-	if(cmdListDevices){
-		string[] deviceIDs = SmartHome.getListofDevicesIDs(se);
-		writeln("List of SmartHome devices:");
+	// home
+	if(cmdHomeDevices){
+		string[] deviceIDs = HomeAutomation.getListofDevicesIDs(se);
+		writeln("List of HomeAutomation devices:");
 		foreach(string deviceID; deviceIDs) {
-			writeln("- " ~ deviceID ~ " (" ~ SmartHome.getNameOfDevice(se, deviceID) ~ ")");
+			writeln("- AIN: " ~ deviceID ~ " (" ~ HomeAutomation.getNameOfDevice(se, deviceID) ~ ")");
 		}
 	}
-
-	// control device
-	writeln(cmdSwitchToggle);
-
-	if(cmdSwitchOn != "")
-		SmartHome.setSwitchDevice(se, cmdSwitchOn, true);	
-	if(cmdSwitchOff != "")
-		SmartHome.setSwitchDevice(se, cmdSwitchOff, false);	
-	if(cmdSwitchToggle != "")
-		SmartHome.toggleSwitchDevice(se, cmdSwitchToggle);	
+	if(cmdHomeSwitchOn != "")
+		HomeAutomation.setSwitchDevice(se, cmdHomeSwitchOn, true);	
+	if(cmdHomeSwitchOff != "")
+		HomeAutomation.setSwitchDevice(se, cmdHomeSwitchOff, false);	
+	if(cmdHomeSwitchToggle != "")
+		HomeAutomation.toggleSwitchDevice(se, cmdHomeSwitchToggle);	
 
 }
