@@ -9,15 +9,15 @@ List all available devices:
 
     % ./smartFRITZctl --home-devices
 
-Switch power socket on:
+Turn on electrical switch:
 
     % ./smartFRITZctl --home-switch-on <AIN>
 
-Switch power socket off:
+Turn off electrical switch:
 
     % ./smartFRITZctl --home-switch-off <AIN>
 
-Toggle power socket
+Toggle electrical switch:
 
     % ./smartFRITZctl --home-switch-toggle <AIN>
 
