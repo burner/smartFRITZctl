@@ -1,8 +1,9 @@
 {
-	"name": "smartFRITZctl",
+	"name": "smartfritzctl",
 	"description": "Command line tools for accessing AVM FRITZ!Box devices.",
 	"authors": ["Alexander Stühring"],
 	"license": "GPL-3.0",
+	"targetName": "smartFRITZctl",
 	"targetType": "executable",
 	"dependencies": {
 		"inifiled": "~>0.0.6"
