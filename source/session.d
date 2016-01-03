@@ -25,9 +25,13 @@ class Session
 
 	bool start(string login_host, string login_user, string login_pwd)
 	{
-		// get challenge
-		auto url_session = "http://" ~ login_host ~ "/login_sid.lua";
-		parseSessionInfo(url_session);
+		try{
+			// get challenge
+			auto url_session = "http://" ~ login_host ~ "/login_sid.lua";
+			parseSessionInfo(url_session);
+		}catch (Exception e){
+			return false;	// invalid hostname
+		}
 
 		// calculate response
 		auto challenge = _challenge;
@@ -35,7 +39,7 @@ class Session
 		response = challenge ~ "-" ~ cast(string) md5utf16le(response);
 		auto url_login = "http://" ~ login_host ~ "/login_sid.lua?username=" ~ login_user ~ "&response=" ~ response;
 		parseSessionInfo(url_login);
-		
+
 		return !equal(_id, "0000000000000000");
 	}
 
