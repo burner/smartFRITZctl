@@ -1,6 +1,8 @@
 # smartFRITZctl
 Command line tools for accessing AVM FRITZ!Box devices.
 
+[![Build Status](https://travis-ci.org/pi/smartFRITZctl.svg)](https://travis-ci.org/pi/smartFRITZctl)
+
 ### Configuration
     % ./smartFRITZctl --configure
 
