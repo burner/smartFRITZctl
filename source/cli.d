@@ -8,6 +8,8 @@ import config;
 import session;
 import homeautomation;
 
+import std.process;
+
 void main(string[] args)
 {
 	// parsing command line arguments
@@ -23,6 +25,9 @@ void main(string[] args)
 			"home-switch-toggle", &cmdHomeSwitchToggle);
 	
 	// configuration
+	string configDir = environment.get("HOME") ~ "/.config/smartFRITZctl/";
+	writeln(configDir);
+
 	SessionConfig confConnection;
 	if(cmdConfigure){
 		char[] input;
