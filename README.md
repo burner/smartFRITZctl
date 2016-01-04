@@ -23,3 +23,10 @@ Toggle electrical switch:
 
     % ./smartFRITZctl --home-switch-toggle <AIN>
 
+Show this help:
+
+    % ./smartFRITZctl --help
+
+Show this help short:
+
+    % ./smartFRITZctl -h

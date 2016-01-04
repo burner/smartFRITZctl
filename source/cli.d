@@ -16,15 +16,24 @@ void main(string[] args)
 	string cmdHomeSwitchOn;
 	string cmdHomeSwitchOff;
 	string cmdHomeSwitchToggle;
-	getopt(args, "configure" , &cmdConfigure,
-			"home-devices", &cmdHomeDevices,
-			"home-switch-on", &cmdHomeSwitchOn,
-			"home-switch-off", &cmdHomeSwitchOff,
-			"home-switch-toggle", &cmdHomeSwitchToggle);
+	auto getoptRslt = getopt(args, "configure" , &cmdConfigure,
+			"home-devices", "List all available devices", &cmdHomeDevices,
+			"home-switch-on", "Turn on electrical switch", &cmdHomeSwitchOn,
+			"home-switch-off", "Turn off electrical switch", &cmdHomeSwitchOff,
+			"home-switch-toggle", "Toggle electrical switch", 
+				&cmdHomeSwitchToggle);
+
+	if(getoptRslt.helpWanted) {
+        defaultGetoptPrinter(
+			"Command line tools for accessing AVM FRITZ!Box devices.",
+            getoptRslt.options
+		);
+		return;
+	}
 	
 	// configuration
 	SessionConfig confConnection;
-	if(cmdConfigure){
+	if(cmdConfigure) {
 		char[] input;
 		confConnection.host = "fritz.box";
 		writeln("Enter Username");
@@ -40,8 +49,7 @@ void main(string[] args)
 	
 	// create connection 
 	Session se = new Session();
-	if(!se.start(confConnection.host, confConnection.user, confConnection.pwd))
-	{
+	if(!se.start(confConnection.host, confConnection.user, confConnection.pwd)) {
 		writeln("error: invalid configuration");
 		return;
 	}
