@@ -1,4 +1,4 @@
-class HomeAutomation
+struct HomeAutomation
 {
 	import std.conv : to;
 	import std.net.curl : get;

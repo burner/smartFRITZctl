@@ -48,7 +48,7 @@ void main(string[] args)
 	readINIFile(confConnection, "smartFRITZctl.ini");
 	
 	// create connection 
-	Session se = new Session();
+	Session se;
 	if(!se.start(confConnection.host, confConnection.user, confConnection.pwd)) {
 		writeln("error: invalid configuration");
 		return;

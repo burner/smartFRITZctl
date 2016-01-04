@@ -1,4 +1,4 @@
-class Session
+struct Session
 {
 	import std.algorithm : equal;
 	import std.conv : to;
@@ -13,10 +13,6 @@ class Session
 	string _challenge;
 	int _blocktime;
 	string _rights;
-
-	this()
-	{
-	}
 
 	string getID()
 	{
