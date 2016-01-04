@@ -20,7 +20,7 @@ void main(string[] args)
 		"home-devices", "List all available devices", &cmdHomeDevices,
 		"home-switch-on", "Turn on electrical switch", &cmdHomeSwitchOn,
 		"home-switch-off", "Turn off electrical switch", &cmdHomeSwitchOff,
-		"home-switch-toggle", "Toggle electrical switch", 
+		"home-switch-toggle", "Toggle electrical switch",
 		&cmdHomeSwitchToggle);
 
 	if(getoptRslt.helpWanted) {
@@ -47,7 +47,7 @@ void main(string[] args)
 	}
 	readINIFile(confConnection, "smartFRITZctl.ini");
 	
-	// create connection 
+	// create connection
 	Session se;
 	if(!se.start(confConnection.host, confConnection.user, confConnection.pwd)) {
 		writeln("error: invalid configuration");
