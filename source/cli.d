@@ -1,15 +1,15 @@
-import std.getopt;
-import std.stdio;
-import std.string;
-
-import inifiled;
-
-import config;
-import session;
-import homeautomation;
-
 void main(string[] args)
 {
+	import std.getopt : getopt, defaultGetoptPrinter;
+	import std.stdio : writeln, readln;
+	import std.string : chop;
+
+	import inifiled;
+	
+	import config;
+	import session;
+	import homeautomation;
+
 	// parsing command line arguments
 	bool cmdConfigure = false;
 	bool cmdHomeDevices = false;

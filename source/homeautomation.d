@@ -1,11 +1,11 @@
-import std.conv;
-import std.net.curl;
-import std.string;
-
-import session;
-
 class HomeAutomation
 {
+	import std.conv : to;
+	import std.net.curl : get;
+	import std.string : chop, split;
+	
+	import session;
+
 	static string[] getListofDevicesIDs(Session session)
 	{
 		string request = "http://fritz.box/webservices/homeautoswitch.lua?switchcmd=getswitchlist&sid=" ~ session.getID();

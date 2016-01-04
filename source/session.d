@@ -1,14 +1,14 @@
-import std.algorithm : equal;
-import std.conv;
-import std.digest.md;
-import std.net.curl;
-import std.stdio;
-import std.string;
-import std.utf;
-import std.xml;
-
 class Session
 {
+	import std.algorithm : equal;
+	import std.conv : to;
+	import std.digest.md;
+	import std.net.curl;
+	import std.stdio;
+	import std.string;
+	import std.utf;
+	import std.xml;
+
 	string _id;
 	string _challenge;
 	int _blocktime;
