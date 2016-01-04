@@ -2,12 +2,7 @@ struct Session
 {
 	import std.algorithm : equal;
 	import std.conv : to;
-	import std.digest.md;
-	import std.net.curl;
-	import std.stdio;
-	import std.string;
-	import std.utf;
-	import std.xml;
+	import std.net.curl : get;
 
 	string _id;
 	string _challenge;
@@ -22,11 +17,11 @@ struct Session
 	bool start(string login_host, string login_user, string login_pwd)
 	{
 		import std.format : format;
-		try{
+		try {
 			// get challenge
 			auto url_session = "http://%s/login_sid.lua".format(login_host);
 			parseSessionInfo(url_session);
-		}catch (Exception e){
+		} catch(Exception e){
 			return false;	// invalid hostname
 		}
 
@@ -43,6 +38,9 @@ struct Session
 
 	static char[32] md5utf16le(string input)
 	{
+		import std.utf : toUTF16;
+		import std.digest.md;
+
 		wstring input_utf16 = toUTF16(input);
 		auto hash = md5Of(input_utf16);
 		return toHexString!(LetterCase.lower)(hash);
@@ -55,6 +53,7 @@ struct Session
 
 	void parseSessionInfo(string url)
 	{
+		import std.xml : check, DocumentParser, Element;
 		string content = cast(string) get(url);
 		check(content);
 		auto xml = new DocumentParser(content);
@@ -67,6 +66,7 @@ struct Session
 
 	void printSessionInfo()
 	{
+		import std.stdio : writeln;
 		writeln("- Session ID: ", _id);
 		writeln("- Challenge: ", _challenge);
 		writeln("- Blocktime: ", _blocktime);

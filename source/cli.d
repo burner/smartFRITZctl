@@ -4,7 +4,7 @@ void main(string[] args)
 	import std.stdio : writeln, writefln, readln;
 	import std.string : chop;
 
-	import inifiled;
+	import inifiled : readINIFile, writeINIFile;
 	
 	import config;
 	import session;
