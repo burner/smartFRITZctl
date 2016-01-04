@@ -1,7 +1,7 @@
 void main(string[] args)
 {
 	import std.getopt : getopt, defaultGetoptPrinter;
-	import std.stdio : writeln, readln;
+	import std.stdio : writeln, writefln, readln;
 	import std.string : chop;
 
 	import inifiled;
@@ -17,11 +17,11 @@ void main(string[] args)
 	string cmdHomeSwitchOff;
 	string cmdHomeSwitchToggle;
 	auto getoptRslt = getopt(args, "configure" , &cmdConfigure,
-			"home-devices", "List all available devices", &cmdHomeDevices,
-			"home-switch-on", "Turn on electrical switch", &cmdHomeSwitchOn,
-			"home-switch-off", "Turn off electrical switch", &cmdHomeSwitchOff,
-			"home-switch-toggle", "Toggle electrical switch", 
-				&cmdHomeSwitchToggle);
+		"home-devices", "List all available devices", &cmdHomeDevices,
+		"home-switch-on", "Turn on electrical switch", &cmdHomeSwitchOn,
+		"home-switch-off", "Turn off electrical switch", &cmdHomeSwitchOff,
+		"home-switch-toggle", "Toggle electrical switch", 
+		&cmdHomeSwitchToggle);
 
 	if(getoptRslt.helpWanted) {
         defaultGetoptPrinter(
@@ -56,10 +56,9 @@ void main(string[] args)
 
 	// home
 	if(cmdHomeDevices){
-		string[] deviceIDs = HomeAutomation.getListofDevicesIDs(se);
 		writeln("List of HomeAutomation devices:");
-		foreach(string deviceID; deviceIDs) {
-			writeln("- AIN: " ~ deviceID ~ " (" ~ HomeAutomation.getNameOfDevice(se, deviceID) ~ ")");
+		foreach(deviceID; HomeAutomation.getListofDevicesIDs(se)) {
+			writefln("- AIN: %s (%s)", HomeAutomation.getNameOfDevice(se, deviceID));
 		}
 	}
 	if(cmdHomeSwitchOn != "")
@@ -68,5 +67,4 @@ void main(string[] args)
 		HomeAutomation.setSwitchDevice(se, cmdHomeSwitchOff, false);	
 	if(cmdHomeSwitchToggle != "")
 		HomeAutomation.toggleSwitchDevice(se, cmdHomeSwitchToggle);	
-
 }

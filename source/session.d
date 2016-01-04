@@ -25,9 +25,10 @@ class Session
 
 	bool start(string login_host, string login_user, string login_pwd)
 	{
+		import std.format : format;
 		try{
 			// get challenge
-			auto url_session = "http://" ~ login_host ~ "/login_sid.lua";
+			auto url_session = "http://%s/login_sid.lua".format(login_host);
 			parseSessionInfo(url_session);
 		}catch (Exception e){
 			return false;	// invalid hostname
@@ -37,7 +38,8 @@ class Session
 		auto challenge = _challenge;
 		auto response = _challenge ~ "-" ~ login_pwd;
 		response = challenge ~ "-" ~ cast(string) md5utf16le(response);
-		auto url_login = "http://" ~ login_host ~ "/login_sid.lua?username=" ~ login_user ~ "&response=" ~ response;
+		auto url_login = "http://%s/login_sid.lua?username=%s&response=%s"
+			.format(login_host, login_user, response);
 		parseSessionInfo(url_login);
 
 		return !equal(_id, "0000000000000000");
